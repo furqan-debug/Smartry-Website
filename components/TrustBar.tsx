@@ -1,72 +1,31 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Activity, Cpu, Route, Shield } from 'lucide-react'
+import { Activity, Shield, Route, Cpu } from 'lucide-react'
 
 const metrics = [
-  {
-    id: 'uptime',
-    icon: Activity,
-    value: '99.9%',
-    label: 'Operational uptime',
-    color: '#22c55e',
-  },
-  {
-    id: 'realtime',
-    icon: Cpu,
-    value: 'Real-time',
-    label: 'Coordination engine',
-    color: '#2563FF',
-  },
-  {
-    id: 'routing',
-    icon: Route,
-    value: 'AI-powered',
-    label: 'Task routing',
-    color: '#FFC72C',
-  },
-  {
-    id: 'enterprise',
-    icon: Shield,
-    value: 'Enterprise',
-    label: 'Ready infrastructure',
-    color: '#8b5cf6',
-  },
+  { id: 'uptime', icon: Activity, value: '99.9%', label: 'Platform Uptime', color: '#16A34A' },
+  { id: 'realtime', icon: Cpu, value: 'Real-Time', label: 'Workforce Insights', color: '#2563FF' },
+  { id: 'security', icon: Shield, value: 'Enterprise-Grade', label: 'Security', color: '#7C3AED' },
+  { id: 'routing', icon: Route, value: 'AI-Powered', label: 'Task Routing', color: '#D97706' },
 ]
 
 export default function TrustBar() {
   return (
-    <section
-      id="trust"
-      className="py-12 relative"
-      aria-label="Platform metrics"
-    >
-      <div className="absolute inset-0 border-y border-border/50 bg-surface/30" />
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-border/30 rounded-2xl overflow-hidden border border-border/30">
+    <section id="trust" className="section-grey py-10" aria-label="Platform metrics">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-slate-200">
           {metrics.map((m, i) => (
-            <motion.div
-              key={m.id}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-50px' }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="flex items-center gap-4 p-6 bg-surface/60 backdrop-blur-sm"
-            >
-              <div
-                className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
-                style={{ background: `${m.color}15`, border: `1px solid ${m.color}30` }}
-              >
+            <motion.div key={m.id}
+              initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.08 }}
+              className="trust-badge py-4 justify-center lg:justify-start">
+              <div className="icon-badge" style={{ background: `${m.color}12`, border: `1px solid ${m.color}25` }}>
                 <m.icon className="w-5 h-5" style={{ color: m.color }} />
               </div>
               <div>
-                <div
-                  className="text-lg font-bold leading-tight"
-                  style={{ fontFamily: 'var(--font-display)', color: m.color }}
-                >
-                  {m.value}
-                </div>
-                <div className="text-sm text-muted-400 font-medium">{m.label}</div>
+                <div className="font-bold text-sm" style={{ fontFamily: 'var(--font-display)', color: m.color }}>{m.value}</div>
+                <div className="text-xs text-slate-500 font-medium">{m.label}</div>
               </div>
             </motion.div>
           ))}

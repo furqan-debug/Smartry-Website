@@ -1,286 +1,244 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
-import { motion, useAnimation } from 'framer-motion'
-import { ArrowRight, Play, CheckCircle, Clock, Users, TrendingUp, Bell, Zap } from 'lucide-react'
+import { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { ArrowRight, Play, CheckCircle, Zap } from 'lucide-react'
 
-const floatingPills = [
-  { icon: Bell, color: '#2563FF', label: 'Room 412 — Service requested', sub: 'Assigned to Housekeeping', delay: 0 },
-  { icon: CheckCircle, color: '#22c55e', label: 'Task completed in 4m 32s', sub: 'SLA met ✓', delay: 1.5 },
-  { icon: Zap, color: '#FFC72C', label: 'AI routed to Floor 4 Team', sub: '3 workers available', delay: 3 },
+const slides = [
+  {
+    id: 'hospitality',
+    phrase: 'hospitality teams',
+    sub: 'Automate task coordination, reduce response times, and give every department the operational clarity it needs.',
+  },
+  {
+    id: 'workforce',
+    phrase: 'workforce operations',
+    sub: 'Route tasks intelligently, track SLA performance in real time, and keep your entire workforce in sync.',
+  },
+  {
+    id: 'service',
+    phrase: 'service businesses',
+    sub: 'From hotels to hospitals to facilities — Smartry adapts to your operations and scales as you grow.',
+  },
 ]
 
 const activeTasks = [
-  { id: 'T-1041', label: 'Room Service — Suite 8B', dept: 'F&B', status: 'In Progress', pct: 65, color: '#2563FF' },
-  { id: 'T-1042', label: 'Housekeeping — Room 310', dept: 'HK', status: 'Assigned', pct: 30, color: '#22c55e' },
-  { id: 'T-1043', label: 'Maintenance — Elevator A', dept: 'ENG', status: 'In Progress', pct: 80, color: '#f59e0b' },
-  { id: 'T-1044', label: 'Concierge — Booking req.', dept: 'FO', status: 'Pending', pct: 10, color: '#8b5cf6' },
+  { dept: 'F&B', label: 'Room Service — Suite 8B', status: 'In Progress', pct: 65, color: '#2563FF' },
+  { dept: 'HK', label: 'Housekeeping — Room 310', status: 'Assigned', pct: 30, color: '#16A34A' },
+  { dept: 'ENG', label: 'Maintenance — Elevator A', status: 'In Progress', pct: 80, color: '#D97706' },
+  { dept: 'FO', label: 'Concierge — Booking req.', status: 'Pending', pct: 10, color: '#7C3AED' },
 ]
 
 export default function HeroSection() {
-  return (
-    <section
-      id="hero"
-      className="relative min-h-screen flex flex-col justify-center pt-20 pb-12 overflow-hidden grid-bg"
-      aria-label="Hero"
-    >
-      {/* Background Glows */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div
-          className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] rounded-full opacity-12"
-          style={{ background: 'radial-gradient(circle, rgba(37,99,255,0.35) 0%, transparent 70%)' }}
-        />
-        <div
-          className="absolute bottom-0 right-0 w-[600px] h-[600px] rounded-full opacity-8"
-          style={{ background: 'radial-gradient(circle, rgba(255,199,44,0.15) 0%, transparent 70%)' }}
-        />
-        <div
-          className="absolute top-0 left-0 w-[500px] h-[500px] rounded-full opacity-6"
-          style={{ background: 'radial-gradient(circle, rgba(37,99,255,0.2) 0%, transparent 70%)' }}
-        />
-      </div>
+  const [idx, setIdx] = useState(0)
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+  useEffect(() => {
+    const t = setInterval(() => setIdx((i) => (i + 1) % slides.length), 2800)
+    return () => clearInterval(t)
+  }, [])
+
+  const current = slides[idx]
+  return (
+    <section id="hero" className="section-light pt-24 pb-16 lg:pt-28 lg:pb-24 relative overflow-hidden" aria-label="Hero">
+      <div className="absolute inset-0 pointer-events-none opacity-40"
+        style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, #E2E8F0 1px, transparent 0)', backgroundSize: '32px 32px' }} />
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] pointer-events-none"
+        style={{ background: 'radial-gradient(circle at top right, rgba(37,99,255,0.05) 0%, transparent 60%)' }} />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
-          {/* Left: Text Content */}
-          <div className="relative z-10">
-            {/* Badge */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-electric/30 bg-electric/10 mb-8"
-            >
-              <div className="live-dot" />
-              <span className="text-xs font-semibold text-electric-400 tracking-wide" style={{ fontFamily: 'var(--font-display)' }}>
-                AI-Powered Operational Intelligence
+          {/* Left */}
+          <div>
+            <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-electric-50 border border-electric-200 mb-6">
+              <div className="w-1.5 h-1.5 rounded-full bg-electric" />
+              <span className="text-xs font-semibold text-electric" style={{ fontFamily: 'var(--font-display)' }}>
+                AI-Powered Workforce Coordination Platform
               </span>
             </motion.div>
 
-            {/* Headline */}
-            <motion.h1
-              initial={{ opacity: 0, y: 28 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.65, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-              className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight mb-6"
-              style={{ fontFamily: 'var(--font-display)' }}
-            >
-              AI-powered{' '}
-              <span className="gradient-text">workforce coordination</span>{' '}
-              for modern service businesses
-            </motion.h1>
-
-            {/* Sub */}
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.35 }}
-              className="text-lg text-muted-400 leading-relaxed mb-8 max-w-xl"
-            >
-              Smartry helps hotels, hospitals, restaurants, and operational teams automate task
-              coordination, optimize workforce response times, and manage daily operations through
-              one intelligent platform.
-            </motion.p>
-
-            {/* CTAs */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              className="flex flex-col sm:flex-row gap-4 mb-8"
-            >
-              <a
-                id="hero-cta-trial"
-                href="#pricing"
-                className="btn-electric flex items-center justify-center gap-2 text-base"
+            <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }}
+              className="mb-5">
+              <h1
+                className="text-4xl sm:text-5xl lg:text-[3.4rem] font-extrabold leading-tight tracking-tight text-slate-900"
+                style={{ fontFamily: 'var(--font-display)' }}
               >
-                <span className="relative z-10">Start Free Trial</span>
-                <ArrowRight className="w-4 h-4 relative z-10" />
+                {/* Static first line */}
+                The AI operating system for
+
+                {/* Line break before animated phrase */}
+                <br />
+
+                {/* Animated cycling phrase */}
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={current.id}
+                    initial={{ opacity: 0, y: 30, filter: 'blur(6px)' }}
+                    animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                    exit={{ opacity: 0, y: -24, filter: 'blur(6px)' }}
+                    transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                    className="gradient-text"
+                    style={{ display: 'inline-block' }}
+                  >
+                    {current.phrase}
+                  </motion.span>
+                </AnimatePresence>
+              </h1>
+
+              {/* Slide indicators */}
+              <div className="flex items-center gap-1.5 mt-4">
+                {slides.map((s, i) => (
+                  <button
+                    key={s.id}
+                    onClick={() => setIdx(i)}
+                    aria-label={`Show slide ${i + 1}`}
+                    className="transition-all duration-400 rounded-full"
+                    style={{
+                      width: i === idx ? 24 : 8,
+                      height: 8,
+                      background: i === idx ? '#2563FF' : '#CBD5E1',
+                    }}
+                  />
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Animated subtitle */}
+            <div className="mb-8 max-w-lg" style={{ minHeight: '4rem' }}>
+              <AnimatePresence mode="wait">
+                <motion.p
+                  key={current.id + '-sub'}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.35, ease: 'easeOut' }}
+                  className="text-lg text-slate-600 leading-relaxed"
+                >
+                  {current.sub}
+                </motion.p>
+              </AnimatePresence>
+            </div>
+
+            <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.3 }}
+              className="flex flex-col sm:flex-row gap-3 mb-7">
+              <a id="hero-cta-trial" href="#pricing" className="btn-accent text-base px-6 py-3">
+                Start Free Trial <ArrowRight className="w-4 h-4" />
               </a>
-              <a
-                id="hero-cta-demo"
-                href="#pricing"
-                className="btn-outline flex items-center justify-center gap-2 text-base"
-              >
-                <Play className="w-4 h-4" />
-                Book a Demo
+              <a id="hero-cta-demo" href="#pricing" className="btn-outline text-base px-6 py-3">
+                <Play className="w-4 h-4" /> Book a Demo
               </a>
             </motion.div>
 
-            {/* Trust line */}
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.65 }}
-              className="text-sm text-muted font-medium"
-            >
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.45 }}
+              className="flex items-center gap-2 text-sm text-slate-500">
+              <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0" />
               Built for hospitality, healthcare, facility management, and service operations
-            </motion.p>
+            </motion.div>
           </div>
 
-          {/* Right: Dashboard Mockup */}
-          <motion.div
-            initial={{ opacity: 0, x: 40, scale: 0.95 }}
-            animate={{ opacity: 1, x: 0, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="relative z-10 hidden lg:block"
-          >
-            <DashboardMockup />
+          {/* Right: Dashboard */}
+          <motion.div initial={{ opacity: 0, x: 30, scale: 0.97 }} animate={{ opacity: 1, x: 0, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.2 }} className="relative hidden lg:block">
+            <motion.div animate={{ y: [0, -6, 0] }} transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+              className="dashboard-frame">
+              {/* Window Bar */}
+              <div className="dashboard-topbar justify-between">
+                <div className="flex items-center gap-1.5">
+                  <div className="w-3 h-3 rounded-full bg-red-400" />
+                  <div className="w-3 h-3 rounded-full bg-yellow-400" />
+                  <div className="w-3 h-3 rounded-full bg-green-400" />
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="live-dot" />
+                  <span className="text-xs font-semibold text-slate-600" style={{ fontFamily: 'var(--font-display)' }}>Smartry Operations</span>
+                </div>
+                <span className="text-xs font-bold text-green-700 bg-green-50 border border-green-200 px-2 py-0.5 rounded-full">Live</span>
+              </div>
 
-            {/* Floating Pills */}
-            {floatingPills.map((pill, i) => (
-              <FloatingPill key={i} {...pill} index={i} />
-            ))}
+              <div className="p-4 bg-slate-50 space-y-3">
+                <div className="grid grid-cols-3 gap-3">
+                  {[
+                    { label: 'Active Tasks', value: '24', delta: '+3 today', color: '#2563FF' },
+                    { label: 'Workers Online', value: '18', delta: '94% active', color: '#16A34A' },
+                    { label: 'SLA Rate', value: '98.4%', delta: '↑2.1%', color: '#D97706' },
+                  ].map((m) => (
+                    <div key={m.label} className="bg-white rounded-xl p-3 border border-slate-200 shadow-sm">
+                      <div className="text-xl font-bold mb-0.5" style={{ color: m.color, fontFamily: 'var(--font-display)' }}>{m.value}</div>
+                      <div className="text-xs text-slate-500">{m.label}</div>
+                      <div className="text-xs mt-1 font-semibold" style={{ color: m.color }}>{m.delta}</div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-3">
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-xs font-bold text-slate-700" style={{ fontFamily: 'var(--font-display)' }}>Active Requests</span>
+                    <span className="text-xs text-slate-400">Live</span>
+                  </div>
+                  <div className="space-y-2.5">
+                    {activeTasks.map((task) => (
+                      <div key={task.dept}>
+                        <div className="flex items-center justify-between mb-1">
+                          <div className="flex items-center gap-2">
+                            <span className="text-xs font-bold px-1.5 py-0.5 rounded"
+                              style={{ background: `${task.color}15`, color: task.color, fontFamily: 'var(--font-display)' }}>{task.dept}</span>
+                            <span className="text-xs text-slate-600 truncate max-w-[120px]">{task.label}</span>
+                          </div>
+                          <span className="text-xs font-semibold" style={{ color: task.color, fontFamily: 'var(--font-display)' }}>{task.status}</span>
+                        </div>
+                        <div className="prog-bar">
+                          <motion.div className="prog-bar-fill" initial={{ width: 0 }}
+                            animate={{ width: `${task.pct}%` }} transition={{ duration: 1.2, delay: 0.7, ease: 'easeOut' }}
+                            style={{ background: task.color }} />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-3">
+                    <div className="text-xs text-slate-500 mb-1">Avg Response</div>
+                    <div className="text-base font-bold text-slate-900" style={{ fontFamily: 'var(--font-display)' }}>4m 12s</div>
+                    <div className="text-xs text-green-600 font-semibold mt-0.5">↓ 18% this week</div>
+                  </div>
+                  <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-3">
+                    <div className="text-xs text-slate-500 mb-1">Completed Today</div>
+                    <div className="text-base font-bold text-slate-900" style={{ fontFamily: 'var(--font-display)' }}>142</div>
+                    <div className="text-xs text-electric font-semibold mt-0.5">↑ 23 vs yesterday</div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Floating pills */}
+            <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0, y: [0, -4, 0] }}
+              transition={{ opacity: { duration: 0.4, delay: 1 }, x: { duration: 0.4, delay: 1 }, y: { duration: 3.5, delay: 1.3, repeat: Infinity } }}
+              className="absolute -right-8 top-20 bg-white border border-slate-200 rounded-2xl shadow-xl p-3 flex items-center gap-3 z-10" style={{ minWidth: 190 }}>
+              <div className="w-8 h-8 bg-green-50 border border-green-200 rounded-lg flex items-center justify-center flex-shrink-0">
+                <CheckCircle className="w-4 h-4 text-green-500" />
+              </div>
+              <div>
+                <div className="text-xs font-bold text-slate-800" style={{ fontFamily: 'var(--font-display)' }}>Task completed</div>
+                <div className="text-xs text-slate-500">SLA met · 4m 32s</div>
+              </div>
+            </motion.div>
+
+            <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0, y: [0, -5, 0] }}
+              transition={{ opacity: { duration: 0.4, delay: 1.3 }, x: { duration: 0.4, delay: 1.3 }, y: { duration: 4, delay: 1.7, repeat: Infinity } }}
+              className="absolute -left-8 bottom-24 bg-white border border-slate-200 rounded-2xl shadow-xl p-3 flex items-center gap-3 z-10" style={{ minWidth: 185 }}>
+              <div className="w-8 h-8 bg-electric-50 border border-electric-200 rounded-lg flex items-center justify-center flex-shrink-0">
+                <Zap className="w-4 h-4 text-electric" />
+              </div>
+              <div>
+                <div className="text-xs font-bold text-slate-800" style={{ fontFamily: 'var(--font-display)' }}>AI task routed</div>
+                <div className="text-xs text-slate-500">Housekeeping · Floor 4</div>
+              </div>
+            </motion.div>
           </motion.div>
         </div>
       </div>
-
-      {/* Bottom gradient fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-24 pointer-events-none"
-        style={{ background: 'linear-gradient(to bottom, transparent, #071B3B)' }} />
     </section>
-  )
-}
-
-function DashboardMockup() {
-  return (
-    <motion.div
-      animate={{ y: [0, -8, 0] }}
-      transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-      className="relative"
-    >
-      {/* Main Dashboard Window */}
-      <div className="dash-card rounded-2xl overflow-hidden shadow-2xl"
-        style={{ boxShadow: '0 32px 64px rgba(0,0,0,0.5), 0 0 0 1px rgba(37,99,255,0.15)' }}
-      >
-        {/* Window Bar */}
-        <div className="flex items-center justify-between px-4 py-3 border-b border-border bg-surface">
-          <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-red-500/70" />
-            <div className="w-3 h-3 rounded-full bg-yellow-500/70" />
-            <div className="w-3 h-3 rounded-full bg-green-500/70" />
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="live-dot" />
-            <span className="text-xs text-muted font-medium" style={{ fontFamily: 'var(--font-display)' }}>
-              Smartry Operations
-            </span>
-          </div>
-          <div className="text-xs text-muted">Live</div>
-        </div>
-
-        {/* Dashboard Body */}
-        <div className="p-4 space-y-4">
-          {/* Metrics Row */}
-          <div className="grid grid-cols-3 gap-3">
-            {[
-              { label: 'Active Tasks', value: '24', icon: TrendingUp, color: '#2563FF', delta: '+3' },
-              { label: 'Workers Online', value: '18', icon: Users, color: '#22c55e', delta: '94%' },
-              { label: 'SLA Rate', value: '98.4%', icon: CheckCircle, color: '#FFC72C', delta: '↑2.1%' },
-            ].map((m) => (
-              <div key={m.label} className="bg-surface-2 rounded-xl p-3 border border-border">
-                <div className="flex items-start justify-between mb-2">
-                  <m.icon className="w-4 h-4" style={{ color: m.color }} />
-                  <span className="text-xs font-semibold" style={{ color: m.color }}>{m.delta}</span>
-                </div>
-                <div className="text-xl font-bold text-soft-white" style={{ fontFamily: 'var(--font-display)' }}>{m.value}</div>
-                <div className="text-xs text-muted mt-0.5">{m.label}</div>
-              </div>
-            ))}
-          </div>
-
-          {/* Active Tasks */}
-          <div className="bg-surface-2 rounded-xl border border-border p-3">
-            <div className="flex items-center justify-between mb-3">
-              <span className="text-xs font-semibold text-soft-white" style={{ fontFamily: 'var(--font-display)' }}>Active Requests</span>
-              <span className="text-xs text-muted">Last 30m</span>
-            </div>
-            <div className="space-y-2.5">
-              {activeTasks.map((task) => (
-                <div key={task.id} className="space-y-1">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <span
-                        className="text-xs font-bold px-1.5 py-0.5 rounded"
-                        style={{ background: `${task.color}20`, color: task.color, fontFamily: 'var(--font-display)' }}
-                      >
-                        {task.dept}
-                      </span>
-                      <span className="text-xs text-muted-400 truncate max-w-[130px]">{task.label}</span>
-                    </div>
-                    <span className="text-xs font-medium" style={{ color: task.color, fontFamily: 'var(--font-display)' }}>
-                      {task.status}
-                    </span>
-                  </div>
-                  <div className="sla-bar">
-                    <motion.div
-                      className="sla-bar-fill"
-                      initial={{ width: 0 }}
-                      animate={{ width: `${task.pct}%` }}
-                      transition={{ duration: 1.2, delay: 0.8, ease: 'easeOut' }}
-                      style={{ background: task.color }}
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Bottom metrics */}
-          <div className="grid grid-cols-2 gap-3">
-            <div className="bg-surface-2 rounded-xl border border-border p-3">
-              <div className="text-xs text-muted mb-1">Avg Response</div>
-              <div className="text-lg font-bold text-soft-white" style={{ fontFamily: 'var(--font-display)' }}>4m 12s</div>
-              <div className="text-xs text-green-400 font-medium mt-0.5">↓ 18% this week</div>
-            </div>
-            <div className="bg-surface-2 rounded-xl border border-border p-3">
-              <div className="text-xs text-muted mb-1">Completed Today</div>
-              <div className="text-lg font-bold text-soft-white" style={{ fontFamily: 'var(--font-display)' }}>142</div>
-              <div className="text-xs text-electric-400 font-medium mt-0.5">↑ 23 vs yesterday</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </motion.div>
-  )
-}
-
-function FloatingPill({ icon: Icon, color, label, sub, delay, index }: {
-  icon: React.ElementType
-  color: string
-  label: string
-  sub: string
-  delay: number
-  index: number
-}) {
-  const positions = [
-    { top: '-16px', left: '-40px' },
-    { bottom: '120px', right: '-32px' },
-    { bottom: '20px', left: '-28px' },
-  ]
-  const pos = positions[index] || {}
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.8 }}
-      animate={{ opacity: 1, scale: 1, y: [0, -6, 0] }}
-      transition={{
-        opacity: { duration: 0.5, delay: delay + 0.8 },
-        scale: { duration: 0.5, delay: delay + 0.8 },
-        y: { duration: 4, delay: delay + 1, repeat: Infinity, ease: 'easeInOut' },
-      }}
-      className="notif-pill absolute z-20"
-      style={{ ...pos }}
-    >
-      <div className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0"
-        style={{ background: `${color}20` }}>
-        <Icon className="w-3.5 h-3.5" style={{ color }} />
-      </div>
-      <div>
-        <div className="text-xs font-semibold text-soft-white" style={{ fontFamily: 'var(--font-display)' }}>{label}</div>
-        <div className="text-xs text-muted">{sub}</div>
-      </div>
-    </motion.div>
   )
 }

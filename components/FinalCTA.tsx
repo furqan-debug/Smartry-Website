@@ -5,80 +5,41 @@ import { ArrowRight, Play } from 'lucide-react'
 
 export default function FinalCTA() {
   return (
-    <section id="final-cta" className="py-24 lg:py-32 relative overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              'linear-gradient(135deg, rgba(37,99,255,0.15) 0%, rgba(7,27,59,0.8) 40%, rgba(37,99,255,0.1) 100%)',
-          }}
-        />
-        <div
-          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] rounded-full"
-          style={{
-            background: 'radial-gradient(ellipse, rgba(37,99,255,0.18) 0%, transparent 70%)',
-          }}
-        />
-      </div>
-
-      {/* Decorative grid */}
-      <div className="absolute inset-0 grid-bg opacity-30" />
+    <section id="final-cta" className="cta-blue py-24 lg:py-28 relative overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none opacity-10"
+        style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)', backgroundSize: '32px 32px' }} />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 32 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        >
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-electric/30 bg-electric/10 mb-8">
-            <span className="text-xs font-bold text-electric-400 tracking-wide" style={{ fontFamily: 'var(--font-display)' }}>
+        <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }} transition={{ duration: 0.6 }}>
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/15 border border-white/30 mb-7">
+            <span className="text-xs font-bold text-white tracking-wide" style={{ fontFamily: 'var(--font-display)' }}>
               Trusted by operational teams globally
             </span>
           </div>
 
-          {/* Headline */}
-          <h2
-            className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-soft-white leading-tight mb-6"
-            style={{ fontFamily: 'var(--font-display)' }}
-          >
-            Transform workforce coordination{' '}
-            <span className="gradient-text">with AI</span>
+          <h2 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight mb-5" style={{ fontFamily: 'var(--font-display)' }}>
+            Gain Complete Workforce Visibility
           </h2>
 
-          {/* Sub */}
-          <p className="text-xl text-muted-400 max-w-2xl mx-auto mb-10 leading-relaxed">
-            Improve operational efficiency, reduce delays, and gain complete operational visibility
-            with Smartry.
+          <p className="text-xl text-blue-100 max-w-2xl mx-auto mb-10 leading-relaxed">
+            Improve operational efficiency, reduce delays, and operate with confidence using Smartry.
           </p>
 
-          {/* CTAs */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a
-              id="final-cta-demo"
-              href="#pricing"
-              className="btn-outline flex items-center gap-2 text-base px-7 py-3.5"
-            >
-              <Play className="w-4 h-4" />
-              Book a Demo
+            <a id="final-cta-trial" href="#pricing"
+              className="inline-flex items-center gap-2 bg-white text-electric font-bold px-7 py-3.5 rounded-xl text-base hover:bg-blue-50 transition-all duration-200 hover:shadow-xl"
+              style={{ fontFamily: 'var(--font-display)' }}>
+              Start Free Trial <ArrowRight className="w-4 h-4" />
             </a>
-            <a
-              id="final-cta-trial"
-              href="#pricing"
-              className="btn-electric flex items-center gap-2 text-base px-7 py-3.5"
-            >
-              <span className="relative z-10">Start Free Trial</span>
-              <ArrowRight className="w-4 h-4 relative z-10" />
+            <a id="final-cta-demo" href="#pricing"
+              className="inline-flex items-center gap-2 bg-white/10 border border-white/30 text-white font-semibold px-7 py-3.5 rounded-xl text-base hover:bg-white/20 transition-all duration-200"
+              style={{ fontFamily: 'var(--font-display)' }}>
+              <Play className="w-4 h-4" /> Schedule a Demo
             </a>
           </div>
 
-          {/* Fine print */}
-          <p className="text-sm text-muted mt-6">
-            No credit card required. Free trial available on all plans.
-          </p>
+          <p className="text-sm text-blue-200 mt-6">No credit card required. Free trial on all plans.</p>
         </motion.div>
       </div>
     </section>
