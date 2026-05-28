@@ -24,7 +24,7 @@ const liveItems = [
 
 export default function PlatformSection() {
   return (
-    <section id="platform" className="section-grey py-24 lg:py-28">
+    <motion.section initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.6, ease: "easeOut" }} id="platform" className="section-grey py-24 lg:py-28">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-14 lg:gap-20 items-center">
 
@@ -102,6 +102,6 @@ export default function PlatformSection() {
           </motion.div>
         </div>
       </div>
-    </section>
+    </motion.section>
   )
 }

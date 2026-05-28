@@ -12,7 +12,7 @@ const metrics = [
 
 export default function TrustBar() {
   return (
-    <section id="trust" className="section-grey py-10" aria-label="Platform metrics">
+    <motion.section initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.6, ease: "easeOut" }} id="trust" className="section-grey py-10" aria-label="Platform metrics">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-slate-200">
           {metrics.map((m, i) => (
@@ -31,6 +31,6 @@ export default function TrustBar() {
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   )
 }

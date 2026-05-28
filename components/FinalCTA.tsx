@@ -5,7 +5,7 @@ import { ArrowRight, Play } from 'lucide-react'
 
 export default function FinalCTA() {
   return (
-    <section id="final-cta" className="cta-blue py-24 lg:py-28 relative overflow-hidden">
+    <motion.section initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.6, ease: "easeOut" }} id="final-cta" className="cta-blue py-24 lg:py-28 relative overflow-hidden">
       <div className="absolute inset-0 pointer-events-none opacity-10"
         style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)', backgroundSize: '32px 32px' }} />
 
@@ -35,6 +35,6 @@ export default function FinalCTA() {
           </div>
         </motion.div>
       </div>
-    </section>
+    </motion.section>
   )
 }
