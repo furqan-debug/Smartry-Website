@@ -48,8 +48,8 @@ export default function HowItWorks() {
         </div>
 
         <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.4 }} className="text-center">
-          <a href="#pricing" className="btn-primary text-base px-7 py-3">
-            Get Started Today <ArrowRight className="w-4 h-4" />
+          <a href="mailto:hello@smartry.io" className="btn-primary text-base px-7 py-3">
+            Contact Us <ArrowRight className="w-4 h-4" />
           </a>
         </motion.div>
       </div>

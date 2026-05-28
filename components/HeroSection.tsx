@@ -122,11 +122,11 @@ export default function HeroSection() {
 
             <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.3 }}
               className="flex flex-col sm:flex-row gap-3 mb-7">
-              <a id="hero-cta-trial" href="#pricing" className="btn-accent text-base px-6 py-3">
-                Start Free Trial <ArrowRight className="w-4 h-4" />
+              <a id="hero-cta-trial" href="#features" className="btn-accent text-base px-6 py-3">
+                Learn More <ArrowRight className="w-4 h-4" />
               </a>
-              <a id="hero-cta-demo" href="#pricing" className="btn-outline text-base px-6 py-3">
-                <Play className="w-4 h-4" /> Book a Demo
+              <a id="hero-cta-demo" href="mailto:hello@smartry.io" className="btn-outline text-base px-6 py-3">
+                Contact Us
               </a>
             </motion.div>
 

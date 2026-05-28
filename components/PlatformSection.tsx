@@ -96,7 +96,7 @@ export default function PlatformSection() {
               ))}
             </div>
             <div className="flex gap-3">
-              <a href="#pricing" className="btn-primary">Start Free Trial</a>
+              <a href="mailto:hello@smartry.io" className="btn-primary">Contact Us</a>
               <a href="#how-it-works" className="btn-outline">How It Works</a>
             </div>
           </motion.div>

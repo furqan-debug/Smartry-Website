@@ -48,10 +48,7 @@ export default function Navbar() {
             </nav>
 
             <div className="hidden lg:flex items-center gap-3">
-              <a href="#pricing" className="px-4 py-2 text-sm font-semibold text-slate-700 hover:text-slate-900 hover:bg-slate-50 rounded-lg transition-colors">
-                Log In
-              </a>
-              <a href="#pricing" className="btn-accent py-2 px-5 text-sm">Start Free Trial</a>
+              <a href="mailto:hello@smartry.io" className="btn-accent py-2 px-5 text-sm">Contact Us</a>
             </div>
 
             <button id="mobile-menu-toggle" aria-label="Toggle mobile menu" aria-expanded={mobileOpen}
@@ -77,8 +74,7 @@ export default function Navbar() {
                 </a>
               ))}
               <div className="flex flex-col gap-2 mt-4 pt-4 border-t border-slate-100">
-                <a href="#pricing" className="btn-outline text-sm justify-center">Log In</a>
-                <a href="#pricing" className="btn-accent text-sm justify-center">Start Free Trial</a>
+                <a href="mailto:hello@smartry.io" className="btn-accent text-sm justify-center">Contact Us</a>
               </div>
             </div>
           </motion.div>

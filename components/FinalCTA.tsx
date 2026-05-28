@@ -27,19 +27,12 @@ export default function FinalCTA() {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a id="final-cta-trial" href="#pricing"
+            <a id="final-cta-trial" href="mailto:hello@smartry.io"
               className="inline-flex items-center gap-2 bg-white text-electric font-bold px-7 py-3.5 rounded-xl text-base hover:bg-blue-50 transition-all duration-200 hover:shadow-xl"
               style={{ fontFamily: 'var(--font-display)' }}>
-              Start Free Trial <ArrowRight className="w-4 h-4" />
-            </a>
-            <a id="final-cta-demo" href="#pricing"
-              className="inline-flex items-center gap-2 bg-white/10 border border-white/30 text-white font-semibold px-7 py-3.5 rounded-xl text-base hover:bg-white/20 transition-all duration-200"
-              style={{ fontFamily: 'var(--font-display)' }}>
-              <Play className="w-4 h-4" /> Schedule a Demo
+              Get in Touch <ArrowRight className="w-4 h-4" />
             </a>
           </div>
-
-          <p className="text-sm text-blue-200 mt-6">No credit card required. Free trial on all plans.</p>
         </motion.div>
       </div>
     </section>
